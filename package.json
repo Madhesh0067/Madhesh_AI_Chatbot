@@ -1,0 +1,15 @@
+{
+  "name": "ai-chatbot-root",
+  "version": "1.0.0",
+  "description": "Root orchestrator for AI Chatbot madhesh",
+  "type": "module",
+  "scripts": {
+    "install-all": "npm install --prefix backend && npm install --prefix frontend",
+    "backend": "npm run start --prefix backend",
+    "frontend": "npm run dev --prefix frontend",
+    "start": "concurrently --kill-others-on-fail \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

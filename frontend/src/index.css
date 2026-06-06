@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply transition-colors duration-300 antialiased font-sans;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.15);
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.25);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.45);
+}
+
+/* Glassmorphism Classes */
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+}
+
+.glass-panel-dark {
+  background: rgba(11, 15, 25, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+}
+
+.glass-input-light {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+}
+
+.glass-input-dark {
+  background: rgba(22, 31, 48, 0.45);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-card-dark {
+  background: rgba(22, 31, 48, 0.3);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Typing Bouncing Dots */
+@keyframes dot-bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+}
+
+.typing-dot {
+  animation: dot-bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+/* Custom Markdown Rendering Styles */
+.prose-custom {
+  font-size: 0.975rem;
+  line-height: 1.625;
+}
+.prose-custom p {
+  margin-bottom: 0.75rem;
+}
+.prose-custom p:last-child {
+  margin-bottom: 0;
+}
+.prose-custom ul, .prose-custom ol {
+  margin-bottom: 0.75rem;
+  padding-left: 1.25rem;
+}
+.prose-custom ul {
+  list-style-type: disc;
+}
+.prose-custom ol {
+  list-style-type: decimal;
+}
+.prose-custom li {
+  margin-bottom: 0.25rem;
+}
+.prose-custom strong {
+  font-weight: 600;
+}
+.prose-custom h1, .prose-custom h2, .prose-custom h3, .prose-custom h4 {
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.prose-custom h1 { font-size: 1.4em; }
+.prose-custom h2 { font-size: 1.25em; }
+.prose-custom h3 { font-size: 1.15em; }
+.prose-custom table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+.prose-custom th, .prose-custom td {
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.dark .prose-custom th, .dark .prose-custom td {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.prose-custom th {
+  background-color: rgba(139, 92, 246, 0.05);
+}
+.dark .prose-custom th {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+.prose-custom blockquote {
+  border-left: 4px solid rgba(139, 92, 246, 0.5);
+  padding-left: 1rem;
+  font-style: italic;
+  margin: 1rem 0;
+  color: rgba(107, 114, 128, 0.9);
+}
+.dark .prose-custom blockquote {
+  color: rgba(156, 163, 175, 0.9);
+}
