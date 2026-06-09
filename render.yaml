@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: madhesh-ai-chatbot
+    runtime: node
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: NODE_ENV
+        value: production

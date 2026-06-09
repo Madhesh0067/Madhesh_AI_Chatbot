@@ -1,5 +1,7 @@
 # madhesh AI - Professional Chatbot Web Application
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Madhesh0067/Madhesh_AI_Chatbot)
+
 A premium, professional AI chatbot web application inspired by ChatGPT, Claude, and Gemini. Built with a React (Vite + Tailwind CSS) frontend and a Node.js (Express) backend powered by the Google Gemini API.
 
 ---
