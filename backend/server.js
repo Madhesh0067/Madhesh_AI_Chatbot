@@ -6,6 +6,8 @@ import pdfParse from 'pdf-parse';
 import mammoth from 'mammoth';
 import { rateLimit } from 'express-rate-limit';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Load environment variables
 dotenv.config();
@@ -197,6 +199,19 @@ app.post('/api/chat', chatLimiter, async (req, res) => {
 // Standard status check
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', bot: 'madhesh', time: new Date().toISOString() });
+});
+
+// Resolve directory paths in ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static files from the React frontend build folder
+const frontendDistPath = path.join(__dirname, '../frontend/dist');
+app.use(express.static(frontendDistPath));
+
+// Fallback all other routes to index.html for React SPA
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendDistPath, 'index.html'));
 });
 
 // Start listening

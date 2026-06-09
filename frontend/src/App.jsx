@@ -5,7 +5,7 @@ import SettingsModal from './components/SettingsModal';
 import ToastContainerComponent from './components/Toast'; // import the default ToastContainer from './components/Toast'
 import { Plus } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000' : '');
 
 export default function App() {
   const [chats, setChats] = useState(() => {
