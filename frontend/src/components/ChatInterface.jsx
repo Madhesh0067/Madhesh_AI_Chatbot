@@ -3,6 +3,8 @@ import { Send, Paperclip, RefreshCw, Download, Menu, FileText, X, Sparkles, Code
 import MessageItem from './MessageItem';
 import TypingIndicator from './TypingIndicator';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 export default function ChatInterface({
   chat,
   onSendMessage,
@@ -71,7 +73,7 @@ export default function ChatInterface({
     try {
       onAddToast(`Reading ${file.name}...`, 'info');
       // Fetch response from Express API
-      const response = await fetch('http://localhost:5000/api/upload', {
+      const response = await fetch(`${API_URL}/api/upload`, {
         method: 'POST',
         body: formData,
       });
