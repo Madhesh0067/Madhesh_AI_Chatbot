@@ -8,6 +8,7 @@ import { rateLimit } from 'express-rate-limit';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 // Load environment variables
 dotenv.config();
@@ -58,7 +59,7 @@ if (!apiKey) {
 const genAI = new GoogleGenerativeAI(apiKey || '');
 
 // Route: Parse uploaded files
-app.post('/api/upload', upload.single('file'), async (req, res) => {
+app.post(['/api/upload', '/upload'], upload.single('file'), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
@@ -115,7 +116,7 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
 });
 
 // Route: Handle chat interactions
-app.post('/api/chat', chatLimiter, async (req, res) => {
+app.post(['/api/chat', '/chat'], chatLimiter, async (req, res) => {
   try {
     const { messages, currentMessage, fileContext } = req.body;
 
@@ -197,7 +198,7 @@ app.post('/api/chat', chatLimiter, async (req, res) => {
 });
 
 // Standard status check
-app.get('/health', (req, res) => {
+app.get(['/api/health', '/health'], (req, res) => {
   res.json({ status: 'healthy', bot: 'madhesh', time: new Date().toISOString() });
 });
 
@@ -205,14 +206,16 @@ app.get('/health', (req, res) => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve static files from the React frontend build folder
+// Serve static files from the React frontend build folder if it exists (e.g. locally or monolithic deploys)
 const frontendDistPath = path.join(__dirname, '../frontend/dist');
-app.use(express.static(frontendDistPath));
+if (fs.existsSync(frontendDistPath)) {
+  app.use(express.static(frontendDistPath));
 
-// Fallback all other routes to index.html for React SPA
-app.get('*', (req, res) => {
-  res.sendFile(path.join(frontendDistPath, 'index.html'));
-});
+  // Fallback all other routes to index.html for React SPA
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendDistPath, 'index.html'));
+  });
+}
 
 // Start listening
 app.listen(PORT, () => {
